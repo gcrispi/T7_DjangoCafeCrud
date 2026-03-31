@@ -86,17 +86,17 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES_sqllite = {
+DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
-DATABASES = {
+DATABASES_2 = {
     "default": dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default="postgresql://postgres:postgres@localhost:5432/mysite",
+        default="postgresql://postgres:postgres@localhost:5432/ticafe",
         conn_max_age=600,
     )
 }
