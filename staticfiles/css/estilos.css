@@ -1,0 +1,67 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 18px;
+    background-color: rgb(141, 113, 12);
+
+}
+
+nav a {
+    font-size: x-small;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+h2 {
+    color: burlywood;
+    font-size: larger;
+    text-align: center;
+}
+
+h3 {
+    color: darkred;
+    font-size: medium;
+    text-align: center;
+}
+
+h4 {
+    color: darkred;
+    font-size: medium;
+    text-align: center;
+}
+
+h4 {
+    color: rgb(25, 96, 195);
+    font-size: medium;
+    text-align: center;
+}
+
+p {
+    color: darkred;
+}
+
+.btn-whatsapp {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 10px #999;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    /* Centrar icono */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.btn-whatsapp:hover {
+    background-color: #fff;
+    color: #25d366;
+    transform: scale(1.1);
+}

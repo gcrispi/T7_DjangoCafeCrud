@@ -32,7 +32,7 @@ urlpatterns = [
 # y de medios durante el desarrollo, lo que permite que las imágenes y
 # otros archivos asociados a los modelos se muestren correctamente en la aplicación.
 if settings.DEBUG:
-    # en modo desarrollo
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 else:
     # en camdo producción
