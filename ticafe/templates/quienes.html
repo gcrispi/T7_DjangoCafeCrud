@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block contenido %}
+{% load static %}
+
+
+<div class="container text-center">
+    <h3>Quienes Somos</h3>
+    <p>Somos una cafetería de especialidad que ofrece los mejores cafés y postres artesanales.</p>
+
+</div>
+
+<!--Acordéon Visión/Mision/Valores-->
+<div class="accordion mt-5" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                aria-controls="panelsStayOpen-collapseOne">
+                Misión
+            </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+                <strong>Nuestra Misión</strong>
+                Ofrecer café de especialidad cuidadosamente seleccionado y preparado, garantizando trazabilidad,
+                frescura y excelencia en cada taza. Buscamos crear una experiencia consistente y educativa para el
+                cliente, promoviendo la cultura del café y generando un ambiente acogedor que invite a permanecer y
+                volver.
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseTwo">
+                Visión
+            </button>
+        </h2>
+        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+            <div class="accordion-body">
+                <strong>La visión de TI-Cafetería</strong>
+                Ser un referente en café de especialidad, reconocido por la calidad del producto, la experiencia del
+                cliente y el compromiso con prácticas sostenibles, posicionándonos como un espacio donde el café se
+                entiende, se valora y se disfruta en profundidad.
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseThree">
+                Valores
+            </button>
+        </h2>
+        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+            <div class="accordion-body">
+                <li><strong>Calidad sin concesiones</strong></li>
+                Priorizamos granos, procesos y preparación de alto estándar, sin atajos.
+                <li><strong>Transparencia</strong></li>
+                Comunicamos el origen, proceso y características del café de forma clara.
+                <li><strong>Sostenibilidad</strong></li>
+                Trabajamos con proveedores responsables y reducimos el impacto ambiental.
+                <li><strong>Pasión por el café</strong></li>
+                No es solo producto, es conocimiento, técnica y mejora continua.
+                <li><strong>Cada interacción importa: servicio consistente, cercano y profesional.</strong></li>
+                Cada interacción importa: servicio consistente, cercano y profesional.
+                <li><strong>Educación</strong></li>
+                Promovemos el aprendizaje del cliente sobre el café de especialidad.
+            </div>
+        </div>
+    </div>
+</div>
+<!--Fin acordéon-->
+{% endblock %}

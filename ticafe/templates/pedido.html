@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block contenido %}
+{% load humanize %}
+<h2>💳Carrito de Compra Ti-Cafetería🛍️</h2>
+<table class="table table-hover table-striped-columns">
+    <thead class="table-primary">
+        <tr>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Descuento</th>
+            <th>total</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for pedido in pedidos %}
+        <tr>
+            <td>{{ pedido.fecha }}</td>
+            <td>{{ pedido.cliente.nombre }}</td>
+            <td>{{ pedido.producto.nombre }}</td>
+            <td>{{ pedido.cantidad }}</td>
+            <td>${{ pedido.descuento }}%</td>
+            <td>${{ pedido.total |floatformat:0 }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class="text-end text-primary" colspan="6">Total: $ {{ total |floatformat:0}}</td>
+        </tr>
+    </tfoot>
+</table>
+{% endblock %}

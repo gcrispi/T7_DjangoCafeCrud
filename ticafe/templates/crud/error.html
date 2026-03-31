@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block contenido %}
+{% load static %}
+<div class="container mt-4">
+    <h2 class="mb-4">Error</h2>
+    <p class="text-danger">{{ error_message }}</p>
+    <a href="{% url 'productos' %}" class="btn btn-primary">Volver a la lista de productos</a>
+</div>
+{% endblock %}

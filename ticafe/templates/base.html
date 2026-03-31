@@ -1,0 +1,101 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TI-Cafetería</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/estilos.css'%}">
+</head>
+
+<body>
+    <!--Estructura Base.html HTML5 header,main,footer-->
+    <header>
+        <div class="container mt-3 mb-3">
+            <h2>TI-Cafeteria - Una Experiencia de Calidad y Especialidad en Café</h2>
+            <!--Barra de Navegacion Bootstrap -->
+
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{% url 'inicio' %}">☕TI-Café🧁</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
+                            <a class="nav-link" href="{% url 'cafeteria' %}">Cafeteria</a>
+                            <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+                            <a class="nav-link" href="{% url 'registrar' %}">Registrate</a>
+                            <a class="nav-link" href="{% url 'carrito_pedido' %}">Carrito Pedido</a>
+                            <a class="nav-link" href="{% url 'quienes_somos' %}">¿Quiénes somos?</a>
+                            <!--Inicio de sesion-->
+                            {% if user.is_authenticated %}
+                            <a class="nav-link" href="{% url 'productos' %}">Productos</a>
+                            <a class="nav-link" href="{% url 'clientes' %}">Clientes</a>
+                            <a class="nav-link" href="{% url 'pedidos' %}">Pedidos</a>
+                            <form method="post" action="/logout_view/" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">🔓Salir</button>
+                            </form>
+                            {% else %}
+                            <a href="/login_view/" class="btn btn-success">🔐Log-In</a>
+                            {% endif %}
+                            <!--Fin inicio sesion-->
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!--Fin de Barra de Navegacion Bootstrap -->
+    </header>
+    <main>
+        <div class="container mt-2 mb-2 text-center">
+            <img src="{% static 'img/ticafe.png' %}" class="img-fluid" alt="banner cafeteria">
+            <!--Django -->
+            {% block contenido %}
+            {% endblock %}
+        </div>
+    </main>
+    <!--Pie de pagina -->
+    <div class="container mt-2 mb-2">
+        <footer class="bg-secondary py-2 pt-2 pb-2 ">
+            <div class="container text-center text-md-start">
+                <div class="row">
+                    <div class="col-md-6 mx-auto mb-4">
+                        <h5 class="text-uppercase fw-bold">☕TI-Cafetería.</h5>
+                    </div>
+                    <div class="col-md-6 mx-auto mb-2 text-md-end">
+                        <h5 class="text-uppercase fw-bold">📒Contacto</h5>
+                        <p>📧 ticafeteria@cafe.cl</p>
+                        <p>📞 +56 9 1234 5678</p>
+                    </div>
+                </div>
+                <div class="text-center p-3" style="background-color: #835c0833;">
+                    © 2026 TI-Cafetería. Todos los derechos reservados. ☕😉
+                </div>
+            </div>
+        </footer>
+
+        <!-- Botón Flotante WhatsApp -->
+        <a href="https://wa.me/+56912345678?text=Hola,%20quisiera%20más%20información" class="btn-whatsapp"
+            target="_blank">
+            <i class="bi bi-whatsapp">
+                <img src="{% static 'img/whatsapp.svg' %}" alt="WhatsApp" width="30" height="30" align="center">
+            </i>
+        </a>
+    </div>
+    <!--Fin Estructura HTML5 header,main,footer-->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

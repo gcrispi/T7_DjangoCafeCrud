@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block contenido %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Listado de Productos</h2>
+
+    <form method="GET" class="mb-3" action="/listar_productos/">
+        <div class="input-group">
+            <input type="text" name="buscar" class="form-control" placeholder="Buscar por categoría o producto..."
+                value="{{ buscar|default:'' }}">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+    </form>
+
+    <!-- Mostrar mensajes -->
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if buscar %}
+    <p>Resultados para: <strong>{{ buscar|default:'' }}</strong></p>
+    {% endif %}
+
+
+    <div class="mb-3">
+        <a href="{% url 'crear_producto' %}" class="btn btn-success">+ Nuevo Producto</a>
+    </div>
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Categoría</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>${{ producto.precio }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>{{ producto.categoria.nombre }}</td>
+                <td>
+                    <a href="{% url 'editar_producto' producto.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{% url 'eliminar_producto' producto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No hay productos registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p class="text-center">
+        Página {{ productos.number }} de {{ productos.paginator.num_pages }}
+    </p>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+
+            {% if productos.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1&buscar={{ buscar|default:'' }}">Primero</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link"
+                    href="?page={{ productos.previous_page_number }}&buscar={{ buscar|default:'' }}">Anterior</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">Primero</span></li>
+            <li class="page-item disabled"><span class="page-link">Anterior</span></li>
+            {% endif %}
+
+            {% for num in productos.paginator.page_range %}
+            {% if productos.number == num %}
+            <li class="page-item active">
+                <span class="page-link">{{ num }}</span>
+            </li>
+            {% elif num > productos.number|add:'-2' and num < productos.number|add:'2' %} <li class="page-item">
+                <a class="page-link" href="?page={{ num }}&buscar={{ buscar|default:'' }}">{{ num }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+
+                {% if productos.has_next %}
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ productos.next_page_number }}&buscar={{ buscar|default:'' }}">Siguiente</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ productos.paginator.num_pages }}&buscar={{ buscar|default:'' }}">Último</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled"><span class="page-link">Siguiente</span></li>
+                <li class="page-item disabled"><span class="page-link">Último</span></li>
+                {% endif %}
+
+        </ul>
+    </nav>
+
+</div>
+
+{% endblock %}

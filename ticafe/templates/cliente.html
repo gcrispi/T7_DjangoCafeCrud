@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
+
+<div class="container mt-3">
+    <p>Clientes</p>
+    {% for cliente in clientes %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ cliente.rut }}</h5>
+            <p class="card-text">Nombre: {{ cliente.nombre }}</p>
+            <p class="card-text">Apellido: {{ cliente.apellido }}</p>
+            <p class="card-text">Apellido: {{ cliente.direccion }}</p>
+            <p class="card-text">Correo: {{ cliente.correo }}</p>
+            <p class="card-text">Teléfono: {{ cliente.telefono }}</p>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

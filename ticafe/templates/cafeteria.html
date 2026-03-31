@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
+<h2>Productos de la Ti-Cafeteria </h2>
+
+<div class="row mt-4">
+    {% for producto in productos %}
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">{{ producto.categoria.nombre }}</h5>
+                <p class="card-text">
+                    <strong>Stock:</strong> {{ producto.stock }}<br>
+                    <strong>Categoría:</strong> {{ producto.nombre }}
+                    <br>
+                    {% if es_usuario %}
+                    <strong>Precio:</strong> ${{ producto.precio }}</b>
+                    <br>
+                    <b class="card-text text-success">Descuento: {{ producto.descuento }}%</b>
+                    {% else %}
+                    <strong>Precio:</strong>
+                    <b class="card-text text-warning">Sin descuento</b>
+                    <br>
+                    <b class="card-text text-primary">${{ producto.precio }}</b>
+                    {% endif%}
+                </p>
+                <img src="{{ producto.categoria.imagen.url }}" alt="{{ producto.categoria.nombre }}"
+                    class="img-fluid mt-2">
+                </p>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#p_{{ producto.id }}">
+                    Ver detalles
+                </button>
+            </div>
+        </div>
+    </div>
+    <!--MODAL-->
+
+    <div class="modal fade" id="p_{{ producto.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Categoria: {{ producto.categoria.nombre }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5>{{ producto.id }}</h5>
+                    <h5>{{ producto.nombre }}</h5>
+                    <p>{{ producto.descripcion }}</p>
+                    <p>Stock: {{ producto.stock }} UNI</p>
+                    <p>${{ producto.precio }}</p>
+                    <p>{{ producto.descuento }} %</p>
+                </div>
+                <div class="modal-footer">
+                    <form method="post" action="/agregar_pedido/{{ producto.id }}/">
+                        {% csrf_token %}
+                        <label class="form-label">cantidad</label>
+                        <input type="number" name="cantidad" min="1" value="1" class="form-control">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Agregar al Pedido</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--FIN MODAL-->
+    {% empty %}
+    <p>No hay productos disponibles.</p>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

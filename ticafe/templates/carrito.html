@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block contenido %}
+<h2>💳Carrito de Compra Ti-Cafetería🛍️</h2>
+
+<form method="POST" action="{% url 'procesar_pedido' %}">
+    {% csrf_token %}
+
+    <table class="table table-hover table-striped-columns">
+        <thead class="table-primary">
+            <tr>
+                <th>Categoría</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Descuento</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in productos %}
+            <tr>
+                <td>{{ item.producto.categoria.nombre }}</td>
+                <td>{{ item.producto.nombre }}</td>
+                <td>${{ item.producto.precio |intcomma }}</td>
+                <td>{{ item.cantidad }} UNI</td>
+                <td>{{ item.descuento |floatformat:0 }}%</td>
+                <td>${{ item.subtotal |intcomma }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center bg-warning">El carrito está vacío</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" class="text-end bg-success text-primary fw-bold">Total:</td>
+                <td class="text-primary bg-danger fw-bold">${{ total|floatformat:0 }}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    {% if productos %}
+    <div class="text-end mt-3">
+        <a href="{% url 'cafeteria' %}" class="btn btn-secondary">Seguir Comprando</a>
+        <button type="submit" class="btn btn-success">Confirmar Pedido</button>
+    </div>
+    {% endif %}
+</form>
+{% endblock %}

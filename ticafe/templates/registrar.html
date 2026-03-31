@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block contenido %}
+
+<div class="row justify-content-center mb-1">
+    <div class="col-md-4">
+        <div class="card shadow  p-4">
+            <h4>Registrate como Cliente TI-Café y Obtén Descuentos</h4>
+            <form class="form-control" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-primary">Regitrarse</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
